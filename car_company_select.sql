@@ -1,0 +1,17 @@
+SELECT 
+    c.COMPANY_NAME AS company_name,
+    ca.CAR_NAME AS car_name,
+    y.YEAR AS year,
+    COUNT(od.OPTIONS_FK) AS option_count
+FROM 
+    COMPANYS c
+JOIN 
+    CARS ca ON c.COMPANY_NAME_PK = ca.COMPANY_NAME_FK
+JOIN 
+    OPTIONDEATIALS od ON ca.CAR_NAME_PK = od.CAR_NAME_FK
+JOIN 
+    YEARS y ON od.YEAR_FK = y.YEAR_PK
+LEFT JOIN 
+    OPTIONS o ON od.OPTIONS_FK = o.OPTIONS_PK
+GROUP BY 
+    c.COMPANY_NAME, ca.CAR_NAME, y.YEAR;
